@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (p of planetData(); track p.pl_name) {
+    @for (p of pagedPlanets(); track p.pl_name) {
       <tr>
         <td>
           {{ p.pl_name }}
@@ -30,3 +30,12 @@
     }
   </tbody>
 </table>
+<ngb-pagination
+  [collectionSize]="planetData().length"
+  [pageSize]="pageSize"
+  [page]="page()"
+  (pageChange)="page.set($event)"
+  [maxSize]="5"
+  [rotate]="true"
+  [boundaryLinks]="true"
+/>

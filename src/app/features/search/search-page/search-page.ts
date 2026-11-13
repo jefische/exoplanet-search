@@ -1,22 +1,27 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
+import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { Exoplanet } from '../../../core/services/exoplanet';
-import { Planet, PLANET_COLUMNS } from '../../../core/models/planet.model';
+import { PLANET_COLUMNS } from '../../../core/models/planet.model';
 
 @Component({
-  imports: [],
+  imports: [NgbPagination],
   selector: 'app-search-page',
   styleUrl: './search-page.scss',
   templateUrl: './search-page.html',
 })
 export class SearchPage implements OnInit {
-  private apiService = inject(Exoplanet);
-  planetData = signal<Planet[]>([]);
   columns = PLANET_COLUMNS;
+  private apiService = inject(Exoplanet);
+  planetData = this.apiService.planetData;
+  page = signal(1);
+  pageSize = 10;
+
+  pagedPlanets = computed(() => {
+    const start = (this.page() - 1) * this.pageSize;
+    return this.planetData().slice(start, start + this.pageSize);
+  });
 
   ngOnInit(): void {
-    this.apiService.searchPlanets().subscribe({
-      next: (data) => this.planetData.set(data),
-      error: (err) => console.error('Fetch failed', err),
-    });
+    this.apiService.load();
   }
 }
