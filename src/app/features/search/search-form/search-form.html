@@ -1,1 +1,54 @@
-<p>search-form works!</p>
+<form [formGroup]="searchForm" (ngSubmit)="search()" class="row g-3 align-items-end mb-3">
+  <div class="col-md-7">
+    <label for="name" class="form-label">Planet or host name</label>
+    <input id="name" class="form-control" formControlName="name" />
+  </div>
+  <div class="col-md-5">
+    <label for="method" class="form-label">Discovery method</label>
+    <select id="method" class="form-select" formControlName="method">
+      <option value="">Any</option>
+      <option>Transit</option>
+      <option>Radial Velocity</option>
+      <option>Microlensing</option>
+      <option>Imaging</option>
+    </select>
+  </div>
+  <div class="col-6 col-md-4">
+    <label for="minYear" class="form-label">Discovered from</label>
+    <input
+      id="minYear"
+      type="number"
+      class="form-control"
+      formControlName="minYear"
+      aria-describedby="minYear-error"
+      [attr.aria-invalid]="searchForm.controls.minYear.hasError('min')"
+    />
+    <div id="minYear-error" class="feedback">
+      @if (searchForm.controls.minYear.hasError('min')) {
+        <p role="alert">Earliest year is 1989.</p>
+      }
+    </div>
+  </div>
+  <div class="col-6 col-md-4">
+    <label for="maxYear" class="form-label">Discovered to</label>
+    <input
+      id="maxYear"
+      type="number"
+      class="form-control"
+      formControlName="maxYear"
+      aria-describedby="maxYear-error"
+      [attr.aria-invalid]="searchForm.hasError('range')"
+    />
+    <div id="maxYear-error" class="feedback">
+      @if (searchForm.hasError('range')) {
+        <p role="alert">Must be on or after "from" year.</p>
+      }
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary" [disabled]="searchForm.invalid">Search</button>
+    </div>
+    <div class="feedback d-none d-md-block" aria-hidden="true"></div>
+  </div>
+</form>

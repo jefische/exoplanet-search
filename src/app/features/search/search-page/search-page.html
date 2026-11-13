@@ -1,4 +1,5 @@
-<table class="table">
+<app-search-form (submitted)="onSearch($event)" />
+<table class="table mt-4">
   <thead>
     <tr>
       @for (c of columns; track c) {
@@ -18,6 +19,9 @@
           {{ p.hostname }}
         </td>
         <td>
+          {{ p.disc_year }}
+        </td>
+        <td>
           {{ p.discoverymethod }}
         </td>
         <td>
@@ -31,7 +35,7 @@
   </tbody>
 </table>
 <ngb-pagination
-  [collectionSize]="planetData().length"
+  [collectionSize]="filteredPlanets().length"
   [pageSize]="pageSize"
   [page]="page()"
   (pageChange)="page.set($event)"

@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+// Fixed-height slot under each input so messages appear without moving anything.
+// Two lines on narrow screens where the half-width columns wrap text.
+.feedback {
+  height: 2.5rem;
+  padding-top: 0.25rem;
+  font-size: 0.875em;
+  line-height: 1.15;
+  color: var(--bs-form-invalid-color);
+
+  p {
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    height: 1.5rem;
+  }
+}

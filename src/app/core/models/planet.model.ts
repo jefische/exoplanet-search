@@ -17,3 +17,9 @@ export const PLANET_COLUMNS = [
   'pl_orbper',
   'sy_dist',
 ] as const satisfies readonly PlanetColumn[];
+export interface SearchCriteria {
+  name: string | null;
+  minYear: number | null;
+  maxYear: number | null;
+  method: string | null;
+}
