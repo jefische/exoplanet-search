@@ -1,1 +1,8 @@
 <p>search-page works!</p>
+<ul>
+  @for (p of planetData(); track p.pl_name) {
+    <li>
+      {{ p.pl_name }}
+    </li>
+  }
+</ul>
