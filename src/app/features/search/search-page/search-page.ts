@@ -1,6 +1,6 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { Exoplanet } from '../../../core/services/exoplanet';
-import { Planet } from '../../../core/models/planet.model';
+import { Planet, PLANET_COLUMNS } from '../../../core/models/planet.model';
 
 @Component({
   imports: [],
@@ -11,6 +11,7 @@ import { Planet } from '../../../core/models/planet.model';
 export class SearchPage implements OnInit {
   private apiService = inject(Exoplanet);
   planetData = signal<Planet[]>([]);
+  columns = PLANET_COLUMNS;
 
   ngOnInit(): void {
     this.apiService.searchPlanets().subscribe({

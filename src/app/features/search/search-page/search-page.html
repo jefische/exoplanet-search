@@ -1,8 +1,32 @@
-<p>search-page works!</p>
-<ul>
-  @for (p of planetData(); track p.pl_name) {
-    <li>
-      {{ p.pl_name }}
-    </li>
-  }
-</ul>
+<table class="table">
+  <thead>
+    <tr>
+      @for (c of columns; track c) {
+        <th>
+          {{ c }}
+        </th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (p of planetData(); track p.pl_name) {
+      <tr>
+        <td>
+          {{ p.pl_name }}
+        </td>
+        <td>
+          {{ p.hostname }}
+        </td>
+        <td>
+          {{ p.discoverymethod }}
+        </td>
+        <td>
+          {{ p.pl_orbper }}
+        </td>
+        <td>
+          {{ p.sy_dist }}
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
