@@ -2,6 +2,38 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.1.
 
+## Project Structure
+
+```
+exoplanet-search/
+├── proxy.conf.json              # dev proxy to NASA
+├── angular.json
+└── src/app/
+    ├── app.config.ts            # provideRouter, provideHttpClient
+    ├── app.routes.ts            # route definitions
+    ├── app.component.ts         # shell with <router-outlet>
+    │
+    ├── core/                    # DATA LAYER (app-wide, singleton)
+    │   ├── models/
+    │   │   └── planet.model.ts          # Planet interface
+    │   └── services/
+    │       └── exoplanet.service.ts     # HttpClient + query building
+    │
+    ├── features/                # UI LAYER (one folder per page)
+    │   ├── search/
+    │   │   ├── search-page.component.ts       # container: calls service, holds state
+    │   │   ├── search-form.component.ts       # reactive form, emits criteria
+    │   │   └── results-table.component.ts     # sorting + pagination display
+    │   └── planet-detail/
+    │       └── planet-detail.component.ts     # /planet/:name route
+    │
+    └── shared/                  # REUSABLE PIECES
+        ├── validators/
+        │   └── range.validator.ts       # "from <= to" check
+        └── components/
+            └── pagination.component.ts
+```
+
 ## Development server
 
 To start a local development server, run:
